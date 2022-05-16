@@ -18,7 +18,8 @@ const List = ()=>{
             </ul>
 
 
-        </div>
+         </div>
+       
     )
 } 
 
