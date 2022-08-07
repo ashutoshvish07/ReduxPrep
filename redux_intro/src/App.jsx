@@ -1,24 +1,61 @@
-
-import './App.css'
-import { handleDec, handleInc } from './Redux/action';
-import { store } from './Redux/store'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
+import Counter from "./Components/Counter";
+import Todo from "./Components/Todo";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginSuccess,
+  loginRequest,
+  loginFailure,
+} from "./Redux/AuthReducer/action";
 
 function App() {
-//   const {dispatch} =store;
-//  const{counter} = store.getState();
-const counter = useSelector((store)=>store.counter);
-const dispatch = useDispatch();
-
-   console.log(counter)
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+  const handleLogin = () => {
+    if (userEmail) {
+      const payload = {
+        email: userEmail,
+        password: password,
+      };
+      console.log(payload);
+      dispatch(loginRequest());
+      axios
+        .post("https://reqres.in/api/login", payload)
+        .then((r) => dispatch(loginSuccess(r.data)))
+        .catch((e) => dispatch(loginFailure()));
+    }
+  };
 
   return (
     <div className="App">
-      <h1>Counter : {counter}</h1>
-      <button onClick={()=> dispatch(handleInc())}>Inc</button>
-      <button onClick={()=> dispatch(handleDec())}>Dec</button>
+      <Counter />
+      <br />
+      <div>
+        <input
+          type="email"
+          placeholder="enter email"
+          value={userEmail}
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="enter password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={handleLogin}>LOGIN</button>
+      </div>
+      {isAuth && <Todo />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

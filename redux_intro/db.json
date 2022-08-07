@@ -1,0 +1,44 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "learn redux",
+      "status": false
+    },
+    {
+      "title": "learn python",
+      "status": false,
+      "id": 2
+    },
+    {
+      "title": "learn java",
+      "status": false,
+      "id": 3
+    },
+    {
+      "title": "learn Django",
+      "status": false,
+      "id": 4
+    },
+    {
+      "title": "bootstrap",
+      "status": false,
+      "id": 5
+    },
+    {
+      "title": "toggle",
+      "status": false,
+      "id": 6
+    },
+    {
+      "title": "",
+      "status": false,
+      "id": 7
+    },
+    {
+      "title": "babu bhai",
+      "status": false,
+      "id": 8
+    }
+  ]
+}
